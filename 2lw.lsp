@@ -1,0 +1,11 @@
+(defun nth-element (i l)
+    (cond   ((= i 0) (first l)) 
+            ((null l) Nil)
+            ((nth-element (- i 1) (rest l)))
+    )    
+)
+
+(print (nth-element 10 (list 1 2 3 4 56)))
+(print (nth-element 3 '(a0 b1 c2 d3 e4)))
+(print (nth-element 5 '(a0 b1 c2 d3 e4)))
+(print (nth-element 0 '(a0 b1 c2 d3 e4)))
