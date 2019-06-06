@@ -1,40 +1,37 @@
-;; (defun foo (val) (* arg 2))
-;; sbcl --script test.lsp
-;; first lab
-;; (defun foo (val) 
-
-;;     (< val 10)
+(setf  A (make-array '(3 3) :initial-contents '((1 2 5) (3 4 5) (3 3 3))))
+(setf  B (make-array '(3 3) :initial-contents '((-11 -12 -50) (-13 -14 5) (3 3 -60))))
 
 
-;; )
-;; ;; (print (foo 2))
-;; (defun obtuse-angled (a b c)
-;;     (+ a b c)
-;; )
-;; (print (obtuse-angled 7.0 2.0 5.0))
-;; end of first lab
+(defun print-matrix (matrix &optional (chars 3) stream)
+  (let ((*print-right-margin* (+ 6 (* (1+ chars)
+                                      (array-dimension matrix 1)))))
+    (pprint matrix stream)
+    (values)))
 
-;; (defun print-list (l)
-;;     (print l)
-;; )
-(defvar l (list 1 3 4 5 6))
-;; (print l)
-;; (print-list (list 1 2 3 4))
-(defun print-list (l i)
-    (print (nth i l))
-)
-;; (print-list (list 1 2 3 4 5) 3)
-
-(defun nth-element (i l)
-    (cond   ((= i 0) (first l)) 
-            ((null l) Nil)
-            ((nth-element (1- i) (rest l)))
+(defun min-elem(matrix)
+    (let ((min_val (aref matrix 0 0))
+          (N (array-dimension matrix 0))
+          (M (array-dimension matrix 1))
+          (result (make-array '(N M)))
+          )
+         
+        (dotimes (i (array-dimension matrix 0))
+            (dotimes (j (array-dimension matrix 1))
+                (if ( < (aref matrix i j) min_val) (setf min_val (aref matrix i j)))
+            ) 
+        )
+             
+         
+         
+         
+         
+    min_val
+         
+         
+         
     )
     
-    
-    ;; (if (= i 0) (first l))
-    ;; (if (= (null x) T) Nil)
-    ;; (nth-element (- i 1) (rest l))
 )
 
-(print (nth-element 10 (list 1 2 3 4 56)))
+
+(print (min-elem B))
