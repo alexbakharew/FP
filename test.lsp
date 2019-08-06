@@ -1,37 +1,31 @@
-(setf  A (make-array '(3 3) :initial-contents '((1 2 5) (3 4 5) (3 3 3))))
-(setf  B (make-array '(3 3) :initial-contents '((-11 -12 -50) (-13 -14 5) (3 3 -60))))
+;gnu clisp 2.49
 
-
-(defun print-matrix (matrix &optional (chars 3) stream)
-  (let ((*print-right-margin* (+ 6 (* (1+ chars)
-                                      (array-dimension matrix 1)))))
-    (pprint matrix stream)
-    (values)))
-
-(defun min-elem(matrix)
-    (let ((min_val (aref matrix 0 0))
-          (N (array-dimension matrix 0))
-          (M (array-dimension matrix 1))
-          (result (make-array '(N M)))
-          )
-         
-        (dotimes (i (array-dimension matrix 0))
-            (dotimes (j (array-dimension matrix 1))
-                (if ( < (aref matrix i j) min_val) (setf min_val (aref matrix i j)))
-            ) 
+(defun words-compare (word1 word2)
+    (let ((result NIL)
+          (frst-char-word1 word1 0)
+          (frst-char-word2 word2 :0)
+          (lst-char-word1 word1 (-(length word1) 1))
+          (lst-char-word2 word2 (-(length word2) 1))
         )
-             
+        (if (and (= frst-char-word1 frst-char-word2) (= lst-char-word1 lst-char-word2)) (setf result T))
+
+        (if (and (= frst-char-word1 lst-char-word2 word2) (= frst-char-word2 word2 lst-char-word1 word1)) (setf result T))
          
-         
-         
-         
-    min_val
-         
-         
-         
-    )
+    result))
+
+(defun ch(txt)
+  (let ((found 0))
+    (loop for word1 in txt
+      do 
+          (loop for word2 in txt
+          do 
+              (if (words-compare word1 word2) (setf found (+ found 1)))
+    ))
     
-)
-
-
-(print (min-elem B))
+   (* found 1/2)))
+    
+                    
+                    
+(print 
+(ch '("а роза упала"
+      "на лапу азора") ))
