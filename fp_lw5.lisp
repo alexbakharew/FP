@@ -1,5 +1,3 @@
-
-
 (defgeneric sub2 (arg1 arg2)
  (:method ((n1 number) (n2 number))
   (- n1 n2)))
@@ -13,7 +11,7 @@
 
 (defclass polynom ()
  ((var-symbol :initarg :var :reader var)
-  ;; Разреженный список термов в порядке убывания степени
+  ;; пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
   (term-list :initarg :terms :reader terms)))
 
 (defgeneric zerop1 (arg)
@@ -25,7 +23,7 @@
   (minusp n)))
 
 (defmethod print-object ((p polynom) stream)
-  (format stream "[МЧ (~s) ~:{~:[~:[+~;-~]~d~[~2*~;~s~*~:;~s^~d~]~;~]~}]"
+  (format stream "[пїЅпїЅ (~s) ~:{~:[~:[+~;-~]~d~[~2*~;~s~*~:;~s^~d~]~;~]~}]"
           (var p)
           (mapcar (lambda (term)
                     (list (zerop1 (coeff term))
@@ -50,7 +48,7 @@
     )
     
 
-(setq p1 (make-instance 'polynom ;полином 1
+(setq p1 (make-instance 'polynom ;пїЅпїЅпїЅпїЅпїЅпїЅпїЅ 1
           :var 'x
           :terms (list (make-term :order 2 :coeff 5)
                        (make-term :order 1 :coeff 3.3)
@@ -64,16 +62,16 @@
                      :var (var p1)
                      :terms (add-terms (terms p1)
                                        (terms p2)))
-      (error "Многочлены от разных переменных: ~s и ~s"
+      (error "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ: ~s пїЅ ~s"
              p1 p2)))
 
 (defun same-variable-p (v1 v2)
-  ;; Переменные v1 и v2 - совпадающие символы
+  ;; пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ v1 пїЅ v2 - пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
   (and (symbolp v1) (symbolp v2) (eq v1 v2)))
 
 (defun add-terms (tl1 tl2)
-  ;; Объединить списки термов tl1 и tl2,
-  ;; упорядочивая по убыванию степеней
+  ;; пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ tl1 пїЅ tl2,
+  ;; пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
   (cond ((null tl1) tl2)
         ((null tl2) tl1)
         (t
@@ -93,10 +91,10 @@
                               (rest tl2)))))))))
 
 (defun adjoin-term (term term-list)
-  ;; Добавить term к списку term-list
-  (if (zerop1 (coeff term))   ; если коэффициент нулевой,
-      term-list               ; то отбрасываем терм,
-      (cons term term-list))) ; иначе накапливаем
+  ;; пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ term пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ term-list
+  (if (zerop1 (coeff term))   ; пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ,
+      term-list               ; пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ,
+      (cons term term-list))) ; пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 
 
 
