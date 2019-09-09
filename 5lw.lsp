@@ -1,7 +1,4 @@
 ;gnu clisp 2.49
-
-;gnu clisp 2.49
-
 (defclass cart ()                ; имя класса и надклассы
  ((x :initarg :x :reader cart-x)   ; дескриптор слота x
   (y :initarg :y :reader cart-y))) ; дескриптор слота y
@@ -33,7 +30,6 @@
   (* (radius p) (sin (angle p))))
 
 (defgeneric to-cart (arg)
- (:documentation "Преобразование аргумента в декартову систему.")
  (:method ((c cart))
   c)
  (:method ((p polar))
@@ -87,49 +83,45 @@
 ) 
 
 (defun прямоугольный-p (tri)
-  (setq epsilon 0.0001)
+  (setq epsilon 0.001)
   (setq a (get-len (vertex1 tri) (vertex2 tri)))
   (setq b (get-len (vertex2 tri) (vertex3 tri)))
   (setq c (get-len (vertex3 tri) (vertex1 tri)))
-  
-  (print a)
-  (print b)
-  (print c)
     
-  (print (square a))
-  (print (square b))
-  (print (square c))
-    
-   (cond   ((< (- (square a) (+ (square b) (square c))) epsilon)  T)
-           ((< (- (square b) (+ (square c) (square a))) epsilon)  T)
-           ((< (- (square c) (+ (square a) (square b))) epsilon)  T)
-       
+   (cond   ((< (abs (- (square a) (+ (square b) (square c)))) epsilon)  T)
+           ((< (abs (- (square b) (+ (square c) (square a)))) epsilon)  T)
+           ((< (abs (- (square c) (+ (square a) (square b)))) epsilon)  T)
    )
     )
 
-(setq p1 (make-instance 'polar :radius 5 :angle (/ pi 6)))
-(setq p2 (make-instance 'polar :radius 2 :angle (/ pi 3)))
-(setq c1 (make-instance 'cart :x 0 :y 0))
-(setq c2 (make-instance 'cart :x 1 :y 1))
-
-;(print (get-len p1 p2))
-;(print (get-len p1 c1))
-;(print (get-len p2 c2))
-
-(setq tri1 (make-instance 'triangle
+(setq tri (make-instance 'triangle
            :1 (make-instance 'cart :x -2 :y 10)
            :2 (make-instance 'cart :x 7 :y -8)
            :3 (make-instance 'polar :radius 6 :angle (/ pi -4))))
 
-(setq tri (make-instance 'triangle
+(setq tri1 (make-instance 'triangle
            :1 (make-instance 'cart :x 0 :y 0)
            :2 (make-instance 'cart :x 3 :y 0)
            :3 (make-instance 'cart :x 3 :y 4)))
-;(print-object tri *standard-output*)
+
+(setq tri2 (make-instance 'triangle
+           :1 (make-instance 'cart :x 0 :y 0)
+           :2 (make-instance 'cart :x 4 :y 0)
+           :3 (make-instance 'cart :x 4 :y 7)))
+
+(setq tri3 (make-instance 'triangle
+           :1 (make-instance 'polar :radius 0 :angle 0)
+           :2 (make-instance 'polar :radius 4 :angle 0)
+           :3 (make-instance 'polar :radius 5.6568 :angle (/ pi -4))))
+
+(setq tri4 (make-instance 'triangle
+           :1 (make-instance 'cart :x -5 :y -5)
+           :2 (make-instance 'polar :radius 4 :angle 0)
+           :3 (make-instance 'cart :x 4 :y 7)))
+
+(print (прямоугольный-p tri))
 (print (прямоугольный-p tri1))
-;;(print-object p *standard-output*)
-;;(print-object c *standard-output*)  
+(print (прямоугольный-p tri2))
+(print (прямоугольный-p tri3))
+(print (прямоугольный-p tri4))
 
-
-
-       
