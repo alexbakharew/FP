@@ -50,9 +50,9 @@
             (setf first-char (char word 0))
             (setf last-char (char word (- (length word) 1)))
             
-            (setf rus-res(russian-char-equal first-char last-char))
-            (setf eng-res(english-char-equal first-char last-char))
-            (if (and rus-res eng-res) (setf found (+ found 1)))
+            (let ((rus-res(russian-char-equal first-char last-char)) (eng-res(english-char-equal first-char last-char)))
+                (if (or rus-res eng-res) (setf found (+ found 1)))
+                 )
         )
     ))
          found)
